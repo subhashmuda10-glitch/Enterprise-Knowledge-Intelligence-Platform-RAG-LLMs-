@@ -41,7 +41,7 @@ Build an end-to-end GenAI system that:
 ├── requirements.txt
 └── README.md
 
-```text
+text'''
 
 ##🧰 Tech Stack
 Language:
