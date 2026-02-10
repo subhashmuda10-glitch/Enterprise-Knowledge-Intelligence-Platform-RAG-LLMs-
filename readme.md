@@ -22,7 +22,7 @@ Build an end-to-end GenAI system that:
 ---
 
 ## 🗂️ Project Structure
-
+```md
 ```text
 .
 ├── api/
