@@ -41,7 +41,7 @@ Build an end-to-end GenAI system that:
 └── README.md
 ```
 
-##🧰 Tech Stack
+## 🧰 Tech Stack
 Language:
 Python
 
@@ -115,25 +115,24 @@ The system is exposed via a FastAPI service.
 
 Available Endpoints
 1. Health Check
-bash
-Copy code
+```md
 GET /health
+```
 Response:
-
-json
-Copy code
+```md
 { "status": "ok" }
+```
 2. Ask a Question
-bash
-Copy code
+```md
 POST /ask
+```
 Request:
 
-json
-Copy code
+```md
 {
   "question": "What is the casual leave policy?"
 }
+```
 Response:
 
 json
