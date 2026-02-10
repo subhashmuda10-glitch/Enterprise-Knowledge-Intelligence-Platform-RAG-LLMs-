@@ -63,12 +63,16 @@ This system combines **semantic search** with **LLM-based generation**, ensuring
 ├── venv/                    # Virtual environment
 ├── requirements.txt
 └── README.md
+
+
 ⚙️ Setup Instructions
+
 1️⃣ Clone the Repository
 bash
 Copy code
 git clone https://github.com/your-username/genai-knowledge-assistant.git
 cd genai-knowledge-assistant
+
 2️⃣ Create & Activate Virtual Environment
 bash
 Copy code
@@ -83,16 +87,19 @@ Linux / macOS
 bash
 Copy code
 source venv/bin/activate
+
 3️⃣ Install Dependencies
 bash
 Copy code
 pip install -r requirements.txt
+
 📥 Document Ingestion
 Place your PDF documents inside the data/ directory and run:
 
 bash
 Copy code
 python ingestion/ingest_docs.py
+
 This will:
 
 Load documents
@@ -117,6 +124,7 @@ API Documentation (Swagger UI)
 arduino
 Copy code
 http://127.0.0.1:8000/docs
+
 🔎 API Endpoints
 Health Check
 bash
@@ -153,6 +161,7 @@ Copy code
     }
   ]
 }
+
 🧠 Conversational Memory
 Stores recent user–assistant interactions in memory (RAM)
 
