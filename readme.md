@@ -1,6 +1,6 @@
-# 📘 Enterprise GenAI Knowledge Assistant (RAG-based Q&A System)
+# 📘 Enterprise Knowledge Intelligence Platform (RAG + LLMs)
 
-Production-style **Generative AI knowledge assistant** built using **Retrieval-Augmented Generation (RAG)** to answer natural-language questions over enterprise documents such as HR policies and manuals.
+Production-style **Enterprise Knowledge Intelligence Platform** built using **Retrieval-Augmented Generation (RAG)** to answer natural-language questions over enterprise documents such as HR policies and manuals.
 
 This project is designed as a **portfolio piece for a GenAI / AI Engineer role**. It demonstrates document ingestion, semantic search, vector databases, prompt-grounded LLM responses, conversational memory, and deployment via a FastAPI backend.
 
