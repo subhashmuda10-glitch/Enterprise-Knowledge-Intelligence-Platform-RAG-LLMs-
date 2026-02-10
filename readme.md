@@ -22,8 +22,8 @@ Build an end-to-end GenAI system that:
 ---
 
 ## 🗂️ Project Structure
+
 ```md
-```text
 .
 ├── api/
 │   └── main.py              # FastAPI entry point
@@ -40,8 +40,7 @@ Build an end-to-end GenAI system that:
 ├── venv/                    # Python virtual environment
 ├── requirements.txt
 └── README.md
-
----
+**
 
 ##🧰 Tech Stack
 Language:
