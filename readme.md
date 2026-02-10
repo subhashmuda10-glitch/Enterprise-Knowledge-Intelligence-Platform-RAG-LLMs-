@@ -1,159 +1,145 @@
 # 📘 Enterprise GenAI Knowledge Assistant (RAG-based Q&A System)
 
-An enterprise-grade **Generative AI knowledge assistant** built using **Retrieval-Augmented Generation (RAG)** to enable accurate, explainable, and context-aware question answering over internal documents such as HR policies and manuals.
+Production-style **Generative AI knowledge assistant** built using **Retrieval-Augmented Generation (RAG)** to answer natural-language questions over enterprise documents such as HR policies and manuals.
 
-This system combines **semantic search** with **LLM-based generation**, ensuring answers are grounded in source documents and suitable for enterprise use cases.
-
----
-
-## 🚀 Key Features
-
-- 📄 Natural language Q&A over enterprise documents (PDFs)
-- 🔍 Semantic search using vector embeddings
-- 🧠 Retrieval-Augmented Generation (RAG) pipeline
-- 🔁 Multi-query expansion for improved retrieval coverage
-- 💬 Conversational memory for multi-turn interactions
-- 📚 Source citations with document and page references
-- ⚡ FastAPI backend with RESTful endpoints
-- 🔐 Designed with enterprise explainability and trust in mind
+This project is designed as a **portfolio piece for a GenAI / AI Engineer role**. It demonstrates document ingestion, semantic search, vector databases, prompt-grounded LLM responses, conversational memory, and deployment via a FastAPI backend.
 
 ---
 
-## 🏗️ System Architecture (High-Level)
+## 🧠 Problem Statement
 
-1. Documents are ingested and split into semantic chunks  
-2. Chunks are converted into embeddings using Hugging Face models  
-3. Embeddings are stored in ChromaDB (vector database)  
-4. User queries are embedded and matched via similarity search  
-5. Retrieved context is injected into an LLM prompt  
-6. LLM generates grounded answers with source attribution  
-7. FastAPI exposes the system as a production-ready API  
+Enterprises store critical knowledge across large volumes of unstructured documents (HR policies, SOPs, manuals). Traditional keyword search is slow, brittle, and fails to understand user intent.
 
----
+### Goal:
+Build an end-to-end GenAI system that:
 
-## 🛠️ Tech Stack
-
-- **Language:** Python  
-- **LLM Framework:** LangChain  
-- **Embeddings & LLMs:** Hugging Face Transformers, Sentence-Transformers, FLAN-T5  
-- **Vector Database:** ChromaDB  
-- **Backend API:** FastAPI, Uvicorn  
-- **Search:** Semantic Vector Search, Multi-Query Expansion  
-- **Memory:** In-memory conversational memory  
-- **Environment:** Python virtual environment (venv)
+- Answers employee questions in natural language  
+- Grounds responses strictly in internal documents  
+- Provides source citations for trust and explainability  
+- Supports follow-up questions via conversational memory  
+- Exposes the system through a production-ready API  
 
 ---
 
-## 📂 Project Structure
+## 🗂️ Project Structure
 
 ```text
 .
 ├── api/
 │   └── main.py              # FastAPI entry point
 ├── rag/
-│   ├── qa_chain.py          # Core RAG pipeline
-│   ├── memory.py            # Conversational memory
+│   ├── qa_chain.py          # Core RAG pipeline (retrieval + generation)
+│   ├── memory.py            # Conversational memory (in-memory buffer)
 │   └── prompts.py           # Prompt templates
 ├── ingestion/
 │   └── ingest_docs.py       # Document ingestion & chunking
 ├── vectorstore/
-│   └── chroma_store.py      # ChromaDB setup
+│   └── chroma_store.py      # ChromaDB setup and persistence
 ├── data/
-│   └── HR_Policy_Manual.pdf # Sample documents
-├── venv/                    # Virtual environment
+│   └── HR_Policy_Manual.pdf # Sample enterprise document
+├── venv/                    # Python virtual environment
 ├── requirements.txt
 └── README.md
 
+##🧰 Tech Stack
+Language:
+Python
 
-⚙️ Setup Instructions
+GenAI / Orchestration:
+LangChain
 
-1️⃣ Clone the Repository
-bash
-Copy code
-git clone https://github.com/your-username/genai-knowledge-assistant.git
-cd genai-knowledge-assistant
+LLMs & Embeddings:
+Hugging Face Transformers, Sentence-Transformers, FLAN-T5
 
-2️⃣ Create & Activate Virtual Environment
-bash
-Copy code
-python -m venv venv
-Windows
+Vector Database:
+ChromaDB
 
-bash
-Copy code
-venv\Scripts\activate
-Linux / macOS
+Search & Retrieval:
+Semantic Vector Search, Multi-Query Expansion
 
-bash
-Copy code
-source venv/bin/activate
+Serving / Backend:
+FastAPI, Uvicorn
 
-3️⃣ Install Dependencies
-bash
-Copy code
-pip install -r requirements.txt
+Memory:
+In-memory conversational memory
 
-📥 Document Ingestion
-Place your PDF documents inside the data/ directory and run:
+Environment & Tools:
+Python venv, VS Code, Git, GitHub
 
-bash
-Copy code
-python ingestion/ingest_docs.py
+## 🏗️ System Architecture Overview
+The system follows a standard Retrieval-Augmented Generation (RAG) workflow:
 
-This will:
+Enterprise documents are ingested and split into semantic chunks
 
-Load documents
+Each chunk is converted into vector embeddings using Hugging Face models
 
-Split them into chunks
+Embeddings are stored in ChromaDB for efficient similarity search
 
-Generate embeddings
+User queries are embedded and matched against stored vectors
 
-Store them in ChromaDB
+Relevant document chunks are retrieved and injected into the prompt
 
-▶️ Running the Application
-Run FastAPI Backend
-bash
-Copy code
-uvicorn api.main:app --reload
-API will be available at:
+A local LLM generates answers strictly grounded in retrieved context
 
-cpp
-Copy code
-http://127.0.0.1:8000
-API Documentation (Swagger UI)
-arduino
-Copy code
-http://127.0.0.1:8000/docs
+Source citations (document + page) are returned with each response
 
-🔎 API Endpoints
-Health Check
+FastAPI exposes the pipeline as a production-ready REST API
+
+## 🔍 RAG Pipeline Details
+Document Ingestion & Chunking
+PDFs are loaded using LangChain document loaders
+
+Text is split using recursive chunking with overlap
+
+Metadata (document name, page number) is preserved for traceability
+
+Embedding & Vector Storage
+Sentence-transformer models generate dense semantic embeddings
+
+ChromaDB stores embeddings and supports fast similarity search
+
+Retrieval & Query Expansion
+User queries are expanded using multi-query expansion
+
+Results are deduplicated to improve retrieval recall and coverage
+
+Prompting & Generation
+Retrieved chunks are injected into a strict prompt template
+
+The LLM is instructed to answer only from provided context
+
+This significantly reduces hallucinations
+
+## 🌐 FastAPI Backend
+The system is exposed via a FastAPI service.
+
+Available Endpoints
+1. Health Check
 bash
 Copy code
 GET /health
-Response
+Response:
 
 json
 Copy code
-{
-  "status": "ok"
-}
-Ask a Question
+{ "status": "ok" }
+2. Ask a Question
 bash
 Copy code
 POST /ask
-Request
+Request:
 
 json
 Copy code
 {
   "question": "What is the casual leave policy?"
 }
-Response
+Response:
 
 json
 Copy code
 {
-  "answer": "...",
+  "answer": "Casual leave can be taken while on tour...",
   "sources": [
     {
       "source": "HR_Policy_Manual.pdf",
@@ -162,56 +148,88 @@ Copy code
   ]
 }
 
-🧠 Conversational Memory
-Stores recent user–assistant interactions in memory (RAM)
+## 🧠 Conversational Memory
+Stores recent user–assistant interactions in application memory (RAM)
 
-Enables follow-up questions with contextual understanding
+Enables follow-up questions such as:
+
+“What about half-day leave?”
 
 Implemented as a lightweight, session-based buffer
 
-Can be extended to Redis or a database for production use
+Suitable for demos; can be replaced with Redis/DB in production
 
-⚖️ Design Trade-offs
+## 🏃 How to Run Locally
+Clone the Repository
+bash
+Copy code
+git clone https://github.com/your-username/genai-knowledge-assistant.git
+cd genai-knowledge-assistant
+Create & Activate Virtual Environment
+Windows
+
+bash
+Copy code
+python -m venv venv
+venv\Scripts\activate
+Linux / macOS
+
+bash
+Copy code
+python3 -m venv venv
+source venv/bin/activate
+Install Dependencies
+bash
+Copy code
+pip install -r requirements.txt
+Run Document Ingestion
+bash
+Copy code
+python ingestion/ingest_docs.py
+Run FastAPI Backend
+bash
+Copy code
+uvicorn api.main:app --reload
+Open in browser:
+
+API Docs: http://127.0.0.1:8000/docs
+
+## ⚖️ Design Trade-offs
 Used open-source local models instead of paid APIs for cost and data privacy
 
-In-memory conversational memory for simplicity
+In-memory conversational memory for simplicity and clarity
 
-Vector-only search (hybrid search and reranking identified as future improvements)
+Vector-only search (hybrid search identified as a future enhancement)
 
-CPU-based inference (GPU recommended for production)
+CPU-based inference for accessibility (GPU recommended for production)
 
-🔮 Future Enhancements
-Hybrid search (BM25 + vector)
+## 🚀 Possible Extensions
+Hybrid search (BM25 + vector search)
 
 Reranking models for improved retrieval precision
 
-Persistent memory (Redis / Database)
+Persistent memory using Redis or a database
 
-Authentication and role-based access
+Authentication and role-based access control
 
-UI layer (Streamlit / React)
+UI layer using Streamlit or React
 
-GPU-based inference
+GPU-accelerated inference
 
-📌 Use Cases
+## 📌 Use Cases
 HR policy assistants
 
-Internal knowledge bases
+Internal enterprise knowledge bases
 
 Employee self-service portals
 
-Enterprise document search
-
 Compliance and audit support tools
 
-📄 License
-This project is intended for learning, demonstration, and portfolio purposes.
+Document intelligence systems
 
-🙌 Acknowledgements
-LangChain
+⭐ Final Note
+Built an end-to-end enterprise GenAI system covering document ingestion, semantic retrieval, prompt-grounded generation, conversational memory, and API deployment.
 
-Hugging Face
 
-ChromaDB
-
-FastAPI
+## 👤 Author
+Subhash Chandra Bose Muda
