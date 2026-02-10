@@ -223,7 +223,7 @@ Compliance and audit support tools
 
 Document intelligence systems
 
-⭐ Final Note
+## ⭐ Final Note
 Built an end-to-end enterprise GenAI system covering document ingestion, semantic retrieval, prompt-grounded generation, conversational memory, and API deployment.
 
 
