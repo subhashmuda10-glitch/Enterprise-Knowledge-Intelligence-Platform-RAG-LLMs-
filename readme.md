@@ -134,9 +134,7 @@ Request:
 }
 ```
 Response:
-
-json
-Copy code
+```md
 {
   "answer": "Casual leave can be taken while on tour...",
   "sources": [
@@ -146,6 +144,7 @@ Copy code
     }
   ]
 }
+```
 
 ## 🧠 Conversational Memory
 Stores recent user–assistant interactions in application memory (RAM)
@@ -160,39 +159,37 @@ Suitable for demos; can be replaced with Redis/DB in production
 
 ## 🏃 How to Run Locally
 Clone the Repository
-bash
-Copy code
+```md
 git clone https://github.com/your-username/genai-knowledge-assistant.git
 cd genai-knowledge-assistant
+```
 Create & Activate Virtual Environment
 Windows
-
-bash
-Copy code
+```md
 python -m venv venv
 venv\Scripts\activate
+```
 Linux / macOS
-
-bash
-Copy code
+```md
 python3 -m venv venv
 source venv/bin/activate
+```
 Install Dependencies
-bash
-Copy code
+```md
 pip install -r requirements.txt
+```
 Run Document Ingestion
-bash
-Copy code
+```md
 python ingestion/ingest_docs.py
+```
 Run FastAPI Backend
-bash
-Copy code
+```md
 uvicorn api.main:app --reload
+```
 Open in browser:
-
+```md
 API Docs: http://127.0.0.1:8000/docs
-
+```
 ## ⚖️ Design Trade-offs
 Used open-source local models instead of paid APIs for cost and data privacy
 
